@@ -1,0 +1,162 @@
+.photo_container {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  overflow: hidden;
+  margin-top: 80px;
+  margin-bottom: 100px;
+}
+
+.photo_container img {
+  border-radius: 24px;
+  width: 28%;
+  animation: slideAnimation 90s linear infinite;
+}
+
+@keyframes slideAnimation {
+  0%,
+  100% {
+    transform: translateX(10%); /* Start from the right */
+  }
+  50% {
+    transform: translateX(-510%); /* Slide to the left quickly */
+  }
+  51% {
+    transform: translateX(-510%); /* Pause for a very short time */
+  }
+}
+.about_aze {
+  width: 100%;
+}
+.about_aze h3 {
+  width: 66%;
+  margin-bottom: 27px;
+}
+.info_with_photo {
+  width: 100%;
+  display: flex;
+  gap: 1.5%;
+  height: 90vh;
+  overflow: hidden;
+  margin-bottom: 100px;
+}
+.gen_info {
+  width: 21%;
+  padding: 37px 18px 0 18px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.02);
+  height: 70%;
+}
+
+.gen_info button {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 11px;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 11px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: rgba(0, 0, 0, 0.3);
+  font-family: "Space Grotesk", sans-serif;
+  padding: 0;
+  text-align: left;
+}
+
+.main_info {
+  padding: 40px 21px 30px 32px;
+  width: 42%;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.02);
+  overflow-y: scroll; /* Enable vertical scrolling */
+  max-height: 100%; /* Ensure the content doesn't overflow the container */
+}
+.main_info {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.main_info h2 {
+  font-weight: bold;
+}
+.main_info p {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.main_info::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main_info::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.main_info::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.gen_info button.selected {
+  color: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(244, 218, 78, 1);
+  display: inline-block;
+}
+.oldCity2 {
+  height: 100%;
+}
+.smoothScroll {
+  scroll-behavior: smooth;
+}
+@media only screen and (max-width: 767px) {
+  /*Mobile*/
+  .photo_container {
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+  .photo_container img {
+    width: 72%;
+  }
+  .about_aze h3 {
+    width: 100%;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .mob_about_aze_content {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 18px;
+  }
+  .mob_main_info {
+    margin-bottom: 18px;
+  }
+  .mob_header_with_plus h2 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .yellowUnderline {
+    border-bottom: 1px rgba(244, 218, 78, 1) solid;
+  }
+
+  .mob_about_aze_content {
+    padding: 20px;
+  }
+  .mob_header_with_plus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mob_main_info p {
+    font-family: "TT Norms Pro";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 17px;
+  }
+}
