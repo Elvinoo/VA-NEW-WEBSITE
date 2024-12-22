@@ -1,0 +1,379 @@
+/* src/components/TourPriceCalculator/TourPriceCalculator.module.css */
+
+/* General Styles */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 1.25rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+  }
+
+  
+  /* Login Container */
+  .loginContainer {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginContainer h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #333;
+  }
+  
+  .loginContainer label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .loginContainer input[type="text"],
+  .loginContainer input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .loginContainer button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffe141;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .loginContainer button:hover {
+    background-color: #ffd700;
+  }
+  
+  .warning {
+    color: #ff0000; /* Red color for warnings */
+    font-style: italic;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  /* Calculator Styles */
+  
+  /* Header */
+  h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #BF8F00;
+    font-weight: bold;
+    
+  }
+  
+  /* Form Containers */
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .firstPart {
+    text-align: center;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .pax,
+  .guide,
+  .guideTransfer,
+  .meals,
+  .galaDinner,
+  .profit,
+  .guideDriverExpenses {
+    width: 100%;
+  }
+  
+  /* Hotels Section */
+  .hotels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .hotelSection {
+    flex: 1;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .hotelSection h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .hotelDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .single,
+  .double,
+  .nights {
+    flex: 1;
+  }
+  
+  .hotelDetails input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+  
+  /* Transportation Section */
+  .transportation {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .transportation h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .cars {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .sedan,
+  .minivan,
+  .sprinter,
+  .bus {
+    flex: 1;
+  }
+  
+  .transportation input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem;
+    text-align: center;
+  }
+  
+  /* Museums Section */
+  .museums {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 0.1rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+  }
+  
+  .museums input[type="checkbox"] {
+    display: none; /* Hide the checkboxes */
+  }
+  
+  /* Custom checkbox design */
+  .museums label {
+    position: relative;
+    display: flex;
+    width: 16%;
+    font-size: 0.9rem;
+    align-items: center; /* Center the text vertically */
+    padding-left: 2rem;
+    cursor: pointer;
+  }
+  
+  .museums label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Center the checkbox vertically */
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #ffe141; /* Border color */
+    border-radius: 3px;
+  }
+  
+  .museums input[type="checkbox"]:checked + label:before {
+    background-color: #ffe141; /* Fill color when checked */
+  }
+  
+  /* Calculate Button */
+  .calculateBtn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: none;
+    background-color: #ffe141;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .calculateBtn:hover {
+    background-color: #ffd700;
+  }
+  
+  /* Result Section */
+  .result {
+    margin-top: 1rem;
+  }
+  
+  .result table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    border-radius: 0.5rem; /* Add border radius */
+    overflow: hidden; /* Hide overflowing content */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+  }
+  
+  .result th,
+  .result td {
+    padding: 0.75rem; /* Adjust padding for better spacing */
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .result th {
+    background-color: green;
+    color: white; /* Adjust text color for better contrast */
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    h1 {
+      margin-bottom: 0.2rem;
+      font-size: 1.2rem;
+    }
+    
+    .museums label {
+      width: 49%;
+      font-size: 0.9rem;
+    }
+    
+    .hotelSection h3 {
+      font-size: 1.2rem;
+    }
+    
+    .transportation h3 {
+      font-size: 1.2rem;
+    }
+    
+    .calculateBtn {
+      font-size: 1rem;
+    }
+    
+    .result table {
+      font-size: 0.8rem;
+    }
+    
+    /* Adjust input sizes */
+    input[type="number"] {
+      padding: 0.5rem; /* Example padding for input fields */
+      text-align: center;
+      width: 100%;
+    }
+    
+    .firstPart {
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    
+    .firstPart .pax,
+    .firstPart .guide,
+    .firstPart .guideTransfer,
+    .firstPart .meals,
+    .firstPart .galaDinner,
+    .firstPart .profit,
+    .firstPart .guideDriverExpenses {
+      padding: 0.01rem;
+      width: 48%; /* Set width to 50% to display inputs in the same line */
+    }
+    
+    .firstPart .profit {
+      width: 96%;
+    }
+  }
+  
+  @media screen and (min-width: 767px) and (max-width: 1024px) {
+    .museums label {
+      width: 32%; /* Adjust width to fit three checkboxes per row */
+      font-size: 0.8rem;
+    }
+    
+    h1 {
+      font-size: 1.1rem;
+    }
+    
+    .hotelSection h3 {
+      font-size: 1rem;
+    }
+    
+    .transportation h3 {
+      font-size: 1rem;
+    }
+    
+    .calculateBtn {
+      font-size: 0.9rem;
+    }
+    
+    .result table {
+      font-size: 0.9rem;
+    }
+    
+    /* Display inputs of firstPart in a single column */
+    .firstPart .pax,
+    .firstPart .guide,
+    .firstPart .guideTransfer,
+    .firstPart .meals,
+    .firstPart .galaDinner,
+    .firstPart .guideDriverExpenses,
+    .firstPart .profit {
+      width: 48%; /* Set width to 100% for single-column layout */
+    }
+    
+    .firstPart .profit {
+      width: 96%;
+    }
+  }
+  

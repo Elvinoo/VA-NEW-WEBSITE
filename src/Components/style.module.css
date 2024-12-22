@@ -1,0 +1,407 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-size: 0.8rem;
+}
+
+/* Login Section */
+.loginContainer {
+  max-width: 350px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.headSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 0 1rem; /* Optional: Add padding to give some spacing */
+}
+.pageHead {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0; /* Remove margin to align perfectly */
+}
+.loginContainer h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+.logoutBtn {
+  background-color: #f1c40f; /* Same yellow as the calculate button */
+  color: #2c3e50; /* Text color */
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.logoutBtn:hover {
+  background-color: #d4ac0d; /* Slightly darker shade on hover */
+  transform: scale(1.05); /* Subtle scale effect */
+}
+
+.logoutBtn:active {
+  transform: scale(0.95); /* Shrink effect on click */
+}
+
+.warning {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.loginContainer label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #34495e;
+}
+
+.loginContainer input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.loginContainer button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f1c40f;
+  color: #2c3e50;
+  font-weight: bold;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.loginContainer button:hover {
+  background-color: #d4ac0d;
+}
+
+/* General Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #eef7f7;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+/* h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+} */
+
+/* Form Container */
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/* Input Fields */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-top:0.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: #34495e;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+/* Remove spinner buttons for number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Webkit browsers */
+  appearance: none; /* Standard property */
+  margin: 0; /* Ensure no unintended margin */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Standard property */
+}
+
+/* First Part */
+.firstPart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.firstPart div {
+  flex: 1;
+  width:100%;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+/* Hotels Section */
+.hotels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.hotelSection {
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.hotelSection h3 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.hotelDetails {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.hotelDetails div {
+  flex: 1;
+}
+
+/* Transportation Section */
+.transportation {
+  
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.transportation h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.cars {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.cars div {
+  flex: 1;
+  text-align: center;
+}
+
+/* Museums Section */
+.museums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.museums label {
+  position: relative;
+  display: inline-block;
+  width: 15%;
+  font-size: 0.95rem;
+  color: #34495e;
+  text-align: left;
+  cursor: pointer;
+  padding-left: 2rem;
+}
+
+.museums input[type="checkbox"] {
+  display: none;
+}
+
+/* Custom checkbox */
+.museums label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #f1c40f;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.museums input[type="checkbox"]:checked + label:before {
+  background-color: #f1c40f;
+}
+
+/* Calculate Button */
+.calculateBtn {
+  display: block;
+  width: 100%;
+
+  margin: 2rem auto;
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  background-color: #f1c40f;
+  color: #2c3e50;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.calculateBtn:hover {
+  background-color: #d4ac0d;
+}
+
+/* Result Section */
+.result {
+  margin-top: 1rem;
+}
+
+.result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.result th,
+.result td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.result th {
+  background-color: green;
+  color: white;
+}
+
+.result td {
+  font-size: 0.9rem;
+}
+tbody tr:last-child{
+  background-color: green;
+  color: white;
+  font-weight: bold;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+    max-width:none;
+    background-color: #eef7f7;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+  .hotels,
+  .transportation
+   {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .museums{
+    flex-direction: row;
+  }
+  .museums label{
+    width: 47%;
+  }
+  .headSection{
+    display: block;
+  }
+  .headSection h1{
+    font-size:1.2rem;
+    margin-bottom:0.9rem;
+  }
+  .tourForm{
+    width: 100%;
+  }
+  .formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.logoutBtn{
+  width:100%;
+}
+.firstPart{
+  text-align: center;
+  gap:0;
+}
+  .firstPart div{
+    flex:none;
+    padding: 0.01rem;
+    width: 44%;
+  }
+  .firstPart div:last-child{
+    width:94%;
+  }
+  .calculateBtn {
+    font-size: 1rem;
+  }
+ 
+ 
+  .result table {
+    font-size: 0.75rem;
+  
+  }
+
+  .result th,
+  .result td{
+ padding: 0.5rem;   
+  }
+}
