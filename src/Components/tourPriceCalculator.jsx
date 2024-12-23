@@ -4,17 +4,14 @@ import React, { useState, useEffect } from "react";
 import styles from "./style.module.css";
 
 function TourPriceCalculator() {
-  // State for login
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  // Predefined credentials
   const predefinedUsername = "VAtravel";
   const predefinedPassword = "VAtraveL+994552775017#";
 
-  // State for calculator
   const initialCalculatorState = {
     paxFrom: 1,
     paxTo: 10,
@@ -29,7 +26,6 @@ function TourPriceCalculator() {
     guideDriverHotel: 0,
     guideDriverMeal: 0,
     profit: 0,
-    // Hotels
     bakuSingle: 0,
     bakuDouble: 0,
     bakuNights: 0,
@@ -42,14 +38,12 @@ function TourPriceCalculator() {
     otherSingle: 0,
     otherDouble: 0,
     otherNights: 0,
-    // Transportation
     sedan: 0,
     minivan: 0,
     sprinter: 0,
     bus: 0,
     eurRate: 1.8,
     usdRate: 1.7,
-    // Museums
     museums: [],
   };
 
@@ -58,15 +52,9 @@ function TourPriceCalculator() {
 
   useEffect(() => {
     const savedLoginState = localStorage.getItem("isLoggedIn");
-    const savedCalculatorData = localStorage.getItem("calculatorData");
-    const savedCalculatorResult = localStorage.getItem("calculatorResult");
-
     if (savedLoginState === "true") setLoggedIn(true);
-    if (savedCalculatorData) setCalculatorData(JSON.parse(savedCalculatorData));
-    if (savedCalculatorResult)
-      setCalculatorResult(JSON.parse(savedCalculatorResult));
   }, []);
-  // Handle login form submission
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (
@@ -80,39 +68,46 @@ function TourPriceCalculator() {
       setLoginError("Invalid username or password!");
     }
   };
+
   const handleLogout = () => {
     setLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("calculatorData");
-    localStorage.removeItem("calculatorResult");
   };
 
-  // Handle calculator input changes
-  const handleCalculatorChange = (e) => {
+  /* const handleCalculatorChange = (e) => {
     const { id, value, type, checked } = e.target;
     if (type === "checkbox") {
       const updatedMuseums = checked
         ? [...calculatorData.museums, parseFloat(value)]
         : calculatorData.museums.filter((v) => v !== parseFloat(value));
       setCalculatorData({ ...calculatorData, museums: updatedMuseums });
-      localStorage.setItem(
-        "calculatorData",
-        JSON.stringify({ ...calculatorData, museums: updatedMuseums })
-      );
     } else {
-      const updatedData = {
+      setCalculatorData({
         ...calculatorData,
         [id]: value === "" ? 0 : parseFloat(value),
-      };
-      setCalculatorData(updatedData);
-      localStorage.setItem("calculatorData", JSON.stringify(updatedData));
+      });
+    }
+  }; */
+  const handleCalculatorChange = (e) => {
+    const { id, value, type, checked } = e.target;
+
+    if (type === "checkbox") {
+      setCalculatorData((prevState) => {
+        const updatedMuseums = checked
+          ? [...prevState.museums, { id, value: parseFloat(value) }] // Add museum with unique id
+          : prevState.museums.filter((museum) => museum.id !== id); // Remove only the unchecked museum by id
+        return { ...prevState, museums: updatedMuseums };
+      });
+    } else {
+      setCalculatorData((prevState) => ({
+        ...prevState,
+        [id]: value === "" ? 0 : parseFloat(value),
+      }));
     }
   };
 
-  // Handle calculator form submission
   const handleCalculatorSubmit = (e) => {
     e.preventDefault();
-
     const {
       paxFrom,
       paxTo,
@@ -147,6 +142,7 @@ function TourPriceCalculator() {
       eurRate,
       usdRate,
     } = calculatorData;
+
     const calculateHotelSS = (single, double, nights) =>
       (single - double / 2) * nights;
 
@@ -182,7 +178,6 @@ function TourPriceCalculator() {
       ganjaDouble * ganjaNights +
       otherDouble * otherNights;
 
-    // Calculate transportation price based on pax
     const getTransportationPrice = (pax) => {
       if (pax < 3) return sedan;
       if (pax > 2 && pax < 5) return minivan;
@@ -194,16 +189,21 @@ function TourPriceCalculator() {
 
     for (let i = paxFrom; i <= paxTo; i++) {
       const transportationPrice = getTransportationPrice(i);
+
       const totalCost =
         (i === 1 ? hotelPriceSingle : hotelPriceDouble * (i / 2)) +
-        guidePerDay * guideDays +
-        transferRate * numberOfTransfers +
-        transportationPrice +
-        mealQuantity * mealPrice * i +
-        galaDinnerPrice * galaDinner * i +
+        (guidePerDay > 0 ? guidePerDay * guideDays : 0) +
+        (transferRate > 0 ? transferRate * numberOfTransfers : 0) +
+        (transportationPrice > 0 ? transportationPrice : 0) +
+        (mealQuantity > 0 && mealPrice > 0 ? mealQuantity * mealPrice * i : 0) +
+        (galaDinner > 0 && galaDinnerPrice > 0
+          ? galaDinnerPrice * galaDinner * i
+          : 0) +
         guideDriverHotel +
         guideDriverMeal +
-        museums.reduce((acc, val) => acc + val * i, 0);
+        (museums.length > 0
+          ? museums.reduce((acc, museum) => acc + museum.value * i, 0)
+          : 0);
 
       const totalProfit = profit * i;
       const taxAndRisk = (totalCost + totalProfit) * 0.12;
@@ -236,8 +236,8 @@ function TourPriceCalculator() {
     });
 
     setCalculatorResult(results);
-    localStorage.setItem("calculatorResult", JSON.stringify(results));
   };
+
   const handleInputFocus = (e, field) => {
     if (calculatorData[field] === 0) {
       setCalculatorData({ ...calculatorData, [field]: "" });
@@ -707,159 +707,197 @@ function TourPriceCalculator() {
                   id="maidenTower"
                   name="museums"
                   value="15"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "maidenTower"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="maidenTower">Giz Gala(15)</label>
-
                 <input
                   type="checkbox"
                   id="shirvanshahPalace"
                   name="museums"
                   value="15"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "shirvanshahPalace"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="shirvanshahPalace">Shirvans(15)</label>
-
                 <input
                   type="checkbox"
                   id="carpetMuseum"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "carpetMuseum"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="carpetMuseum">Carpet (10)</label>
-
                 <input
                   type="checkbox"
                   id="heydarAliyevCenter"
                   name="museums"
                   value="15"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "heydarAliyevCenter"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="heydarAliyevCenter">H.Aliyev C(15)</label>
-
                 <input
                   type="checkbox"
                   id="nationalMuseumHistory"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "nationalMuseumHistory"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="nationalMuseumHistory">Tarix (10)</label>
-
                 <input
                   type="checkbox"
                   id="gobustanRockArt"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "gobustanRockArt"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="gobustanRockArt">Qobustan(10)</label>
-
                 <input
                   type="checkbox"
                   id="mudVolcanos"
                   name="museums"
                   value="5"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "mudVolcanos"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="mudVolcanos">Palçıq(5)</label>
-
                 <input
                   type="checkbox"
                   id="atashgah"
                   name="museums"
                   value="9"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "atashgah"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="atashgah">Atəşgah(9)</label>
-
                 <input
                   type="checkbox"
                   id="nobel"
                   name="museums"
                   value="5"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "nobel"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="nobel">Nobel (5)</label>
-
                 <input
                   type="checkbox"
                   id="yanardagh"
                   name="museums"
                   value="9"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "yanardagh"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="yanardagh">Yanardağ(9 AZN)</label>
-
                 <input
                   type="checkbox"
                   id="galaReserve"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "galaReserve"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="galaReserve">Qala (10 AZN)</label>
-
                 <input
                   type="checkbox"
                   id="mardakanCastle"
                   name="museums"
                   value="5"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "mardakanCastle"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="mardakanCastle">Mərdəkan (5 AZN)</label>
-
                 <input
                   type="checkbox"
                   id="diriBaba"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "diriBaba"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="diriBaba">Diri Baba (10)</label>
-
                 <input
                   type="checkbox"
                   id="chuxurGabala"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "chuxurGabala"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="chuxurGabala">Çuxur Qəbələ(10)</label>
-
                 <input
                   type="checkbox"
                   id="fazil"
                   name="museums"
                   value="5"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "fazil"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="fazil">Fazıl (5)</label>
-
                 <input
                   type="checkbox"
                   id="shakiKhansPalace"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "shakiKhansPalace"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="shakiKhansPalace">Xan Sarayı(10)</label>
-
                 <input
                   type="checkbox"
                   id="kish"
                   name="museums"
                   value="10"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "kish"
+                  )}
                   onChange={handleCalculatorChange}
                 />
-                <label htmlFor="kish">Kiş (10 AZN)</label>
 
+                <label htmlFor="kish">Kiş (10 AZN)</label>
                 <input
                   type="checkbox"
                   id="eVisa"
                   name="museums"
                   value="50"
+                  checked={calculatorData.museums.some(
+                    (museum) => museum.id === "eVisa"
+                  )}
                   onChange={handleCalculatorChange}
                 />
                 <label htmlFor="eVisa">E-Visa (50 AZN)</label>
